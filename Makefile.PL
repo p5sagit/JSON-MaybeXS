@@ -4,16 +4,22 @@ use 5.008001;
 use ExtUtils::MakeMaker;
 (do 'maint/Makefile.PL.include' or die $@) unless -f 'META.yml';
 
+my %BUILD_DEPS = (
+  'Test::Without::Module' => '0.17',
+  'Test::More' => '0.88'
+);
+
 WriteMakefile(
   NAME => 'JSON::MaybeXS',
   VERSION_FROM => 'lib/JSON/MaybeXS.pm',
   PREREQ_PM => {
     'JSON::PP' => '2.27202',
-    'Test::Without::Module' => '0.17',
     (can_xs()
       ? ('Cpanel::JSON::XS' => '2.3310')
-      : ())
+      : ()),
+    %BUILD_DEPS,
   },
+  BUILD_REQUIRES => \%BUILD_DEPS,
 );
 
 # can we locate a (the) C compiler
