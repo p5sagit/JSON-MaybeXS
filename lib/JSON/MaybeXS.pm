@@ -31,6 +31,14 @@ our @EXPORT = qw(encode_json decode_json JSON);
 
 sub JSON () { our $JSON_Class }
 
+sub new {
+  shift;
+  my %args = @_ == 1 ? %{$_[0]} : @_;
+  my $new = (our $JSON_Class)->new;
+  $new->$_($args{$_}) for keys %args;
+  return $new;
+}
+
 1;
 
 =head1 NAME
@@ -47,6 +55,8 @@ JSON::MaybeXS - use L<Cpanel::JSON::XS> with a fallback to L<JSON::PP>
 
   my $json = JSON->new;
 
+  my $json_with_args = JSON::MaybeXS->new(utf8 => 1); # or { utf8 => 1 }
+
 =head1 DESCRIPTION
 
 This module tries to load L<Cpanel::JSON::XS>, and if that fails instead
@@ -56,6 +66,10 @@ thrown.
 It then exports the C<encode_json> and C<decode_json> functions from the
 loaded module, along with a C<JSON> constant that returns the class name
 for calling C<new> on.
+
+If you're writing fresh code rather than replacing JSON.pm usage, you might
+want to pass options as constructor args rather than calling mutators, so
+we provide our own C<new> method that supports that.
 
 =head1 EXPORTS
 
@@ -91,6 +105,22 @@ use as a class name - so:
 and that object can then be used normally:
 
   my $data_structure = $json_obj->decode($json_text); # etc.
+
+=head1 CONSTRUCTOR
+
+=head2 new
+
+With L<JSON::PP> and L<Cpanel::JSON::XS> you are required to call mutators
+to set options, i.e.
+
+  my $json = $class->new->utf8(1)->pretty(1);
+
+Since this is a trifle irritating and noticeably un-perlish, we also offer:
+
+  my $json = JSON::MaybeXS->new(utf8 => 1, pretty => 1);
+
+which works equivalently to the above (and in the usual tradition will accept
+a hashref instead of a hash, should you so desire).
 
 =head1 AUTHOR
 
