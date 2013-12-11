@@ -4,7 +4,7 @@ use strict;
 use warnings FATAL => 'all';
 use base qw(Exporter);
 
-our $VERSION = '1.000000';
+our $VERSION = '1.001000';
 
 BEGIN {
   our $JSON_Class;
