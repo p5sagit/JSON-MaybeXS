@@ -1,15 +1,8 @@
 use strict;
 use warnings FATAL => 'all';
-
-use Test::Without::Module 'Cpanel::JSON::XS';
+use if !do { require JSON::XS; 1; }, 'Test::More', skip_all => 'No JSON::XS';
 use Test::More;
 use JSON::MaybeXS;
-
-unless ( eval { require JSON::XS; 1 } ) {
-    plan skip_all => 'JSON::XS not installed';
-    done_testing;
-    exit;
-}
 
 is( JSON, 'JSON::XS', 'Correct JSON class' );
 

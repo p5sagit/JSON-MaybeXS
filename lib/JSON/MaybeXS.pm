@@ -6,25 +6,28 @@ use base qw(Exporter);
 
 our $VERSION = '1.001000';
 
-BEGIN {
-  our $JSON_Class;
+sub _choose_json_module {
+    return 'Cpanel::JSON::XS' if $INC{'Cpanel/JSON/XS.pm'};
+    return 'JSON::XS'         if $INC{'JSON/XS.pm'};
 
-  our @err;
+    my @err;
 
-  if (eval { require Cpanel::JSON::XS; 1; }) {
-    $JSON_Class = 'Cpanel::JSON::XS';
-  } else {
+    return 'Cpanel::JSON::XS' if eval { require Cpanel::JSON::XS; 1; };
     push @err, "Error loading Cpanel::JSON::XS: $@";
-    if (eval { require JSON::PP; 1; }) {
-      $JSON_Class = 'JSON::PP';
-    } else {
-      push @err, "Error loading JSON::PP: $@";
-    }
-  }
-  unless ($JSON_Class) {
-    die join("\n", "Couldn't load a JSON module:", @err);
-  }
-  $JSON_Class->import(qw(encode_json decode_json));
+
+    return 'JSON::XS' if eval { require JSON::XS; 1; };
+    push @err, "Error loading JSON::XS: $@";
+
+    return 'JSON::PP' if eval { require JSON::PP; 1 };
+    push @err, "Error loading JSON::PP: $@";
+
+    die join( "\n", "Couldn't load a JSON module:", @err );
+
+}
+
+BEGIN {
+    our $JSON_Class = _choose_json_module();
+    $JSON_Class->import(qw(encode_json decode_json));
 }
 
 our @EXPORT = qw(encode_json decode_json JSON);
@@ -43,7 +46,7 @@ sub new {
 
 =head1 NAME
 
-JSON::MaybeXS - use L<Cpanel::JSON::XS> with a fallback to L<JSON::PP>
+JSON::MaybeXS - use L<Cpanel::JSON::XS> with a fallback to L<JSON::XS> and L<JSON::PP>
 
 =head1 SYNOPSIS
 
@@ -59,9 +62,10 @@ JSON::MaybeXS - use L<Cpanel::JSON::XS> with a fallback to L<JSON::PP>
 
 =head1 DESCRIPTION
 
-This module tries to load L<Cpanel::JSON::XS>, and if that fails instead
-tries to load L<JSON::PP>. If neither is available, an exception will be
-thrown.
+This module first checks to see if either L<Cpanel::JSON::XS> or
+L<JSON::XS> is already loaded, in which case it uses that module. Otherwise
+it tries to load L<Cpanel::JSON::XS>, then L<JSON::XS>, then L<JSON::PP>
+in order, and either uses the first module it finds or throws an error.
 
 It then exports the C<encode_json> and C<decode_json> functions from the
 loaded module, along with a C<JSON> constant that returns the class name
@@ -110,8 +114,8 @@ and that object can then be used normally:
 
 =head2 new
 
-With L<JSON::PP> and L<Cpanel::JSON::XS> you are required to call mutators
-to set options, i.e.
+With L<JSON::PP>, L<JSON::XS> and L<Cpanel::JSON::XS> you are required to call
+mutators to set options, i.e.
 
   my $json = $class->new->utf8(1)->pretty(1);
 
