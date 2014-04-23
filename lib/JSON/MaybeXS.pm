@@ -132,7 +132,13 @@ mst - Matt S. Trout (cpan:MSTROUT) <mst@shadowcat.co.uk>
 
 =head1 CONTRIBUTORS
 
-None yet. Well volunteered? :)
+=over 4
+
+=item * Clinton Gormley <drtech@cpan.org>
+
+=item * Karen Etheridge <ether@cpan.org>
+
+=back
 
 =head1 COPYRIGHT
 
