@@ -4,8 +4,8 @@ use 5.008001;
 use ExtUtils::MakeMaker;
 (do 'maint/Makefile.PL.include' or die $@) unless -f 'META.yml';
 
-# we require Cpanel::JSON::XS, except if JSON::XS is already installed we only
-# reocmmend it.
+# we require Cpanel::JSON::XS, except if JSON::XS is already installed.
+# (we also always recommend Cpanel::JSON::XS, just to make sure.)
 my $require_cpanel_json_xs = can_xs() && !eval { require JSON::XS; 1; };
 
 my %WriteMakefileArgs = (
@@ -26,9 +26,7 @@ my %WriteMakefileArgs = (
   META_MERGE => {
     'meta-spec' => { version => 2 },
     dynamic_config => 1,
-    ($require_cpanel_json_xs
-      ? ()
-      : (prereqs => { runtime => { recommends => { 'Cpanel::JSON::XS' => '2.3310' } } })),
+    prereqs => { runtime => { recommends => { 'Cpanel::JSON::XS' => '2.3310' } } },
 
     resources => {
       repository => {
