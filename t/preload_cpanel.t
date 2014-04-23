@@ -1,6 +1,6 @@
 use strict;
 use warnings FATAL => 'all';
-use if !do { require Cpanel::JSON::XS; 1; }, 'Test::More', skip_all => 'No Cpanel::JSON::XS';
+use if !eval { require Cpanel::JSON::XS; 1; }, 'Test::More', skip_all => 'No Cpanel::JSON::XS';
 use Test::More;
 use JSON::MaybeXS;
 
