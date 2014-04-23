@@ -1,3 +1,4 @@
+Revision history for JSON-MaybeXS
 
  - Now also supports JSON::XS, when available: Cpanel::JSON::XS will only be
    installed when there is no XS backend already installed; Cpanel::JSON::XS
