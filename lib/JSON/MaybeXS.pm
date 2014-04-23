@@ -88,7 +88,7 @@ To import only some symbols, specify them on the C<use> line:
 =head2 encode_json
 
 This is the C<encode_json> function provided by the selected implementation
-module, and takes a perl data stucture which is serialised to JSON text.
+module, and takes a perl data structure which is serialised to JSON text.
 
   my $json_text = encode_json($data_structure);
 
