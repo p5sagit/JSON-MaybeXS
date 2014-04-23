@@ -1,3 +1,8 @@
+
+ - Now also supports JSON::XS, when available: Cpanel::JSON::XS will only be
+   installed when there is no XS backend already installed; Cpanel::JSON::XS
+   will be used over JSON::XS when both are installed.
+
 1.001000 - 2013-12-11
   - Add a constructor for people who want to forget how silly the JSON API is
 

@@ -9,17 +9,28 @@ my %BUILD_DEPS = (
   'Test::More' => '0.88'
 );
 
+# we require Cpanel::JSON::XS, except if JSON::XS is already installed we only
+# reocmmend it.
+my $require_cpanel_json_xs = can_xs() && !eval { require JSON::XS; 1; };
+
 WriteMakefile(
   NAME => 'JSON::MaybeXS',
   VERSION_FROM => 'lib/JSON/MaybeXS.pm',
   PREREQ_PM => {
     'JSON::PP' => '2.27202',
-    (can_xs()
+    ($require_cpanel_json_xs
       ? ('Cpanel::JSON::XS' => '2.3310')
       : ()),
     %BUILD_DEPS,
   },
   BUILD_REQUIRES => \%BUILD_DEPS,
+  META_MERGE => {
+    'meta-spec' => { version => 2 },
+    dynamic_config => 1,
+    ($require_cpanel_json_xs
+      ? ()
+      : (prereqs => { runtime => { recommends => { 'Cpanel::JSON::XS' => '2.3310' } } })),
+  },
 );
 
 # can we locate a (the) C compiler
