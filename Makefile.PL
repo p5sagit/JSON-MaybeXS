@@ -18,6 +18,11 @@ my %WriteMakefileArgs = (
       : ()),
     perl => '5.006',
   },
+  CONFIGURE_REQUIRES => {
+    'ExtUtils::CBuilder' => '0.27',
+    'File::Spec' => '0',
+    'File::Temp' => '0',
+  },
   TEST_REQUIRES => {
     'Test::Without::Module' => '0.17',
     'Test::More' => '0.88'
@@ -46,14 +51,19 @@ my %WriteMakefileArgs = (
 
 my $eumm_version  = eval $ExtUtils::MakeMaker::VERSION;
 $WriteMakefileArgs{MIN_PERL_VERSION} = delete $WriteMakefileArgs{PREREQ_PM}{perl} || 0;
+
 $WriteMakefileArgs{BUILD_REQUIRES} = {
     %{$WriteMakefileArgs{BUILD_REQUIRES} || {}},
     %{delete $WriteMakefileArgs{TEST_REQUIRES}}
 } if $eumm_version < 6.63_03;
+
 $WriteMakefileArgs{PREREQ_PM} = {
     %{$WriteMakefileArgs{PREREQ_PM}},
     %{delete $WriteMakefileArgs{BUILD_REQUIRES}}
 } if $eumm_version < 6.55_01;
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  if $eumm_version < 6.51_03;
 
 WriteMakefile(%WriteMakefileArgs);
 
