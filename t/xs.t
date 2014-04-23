@@ -6,7 +6,7 @@ use Test::More;
 use JSON::MaybeXS;
 
 unless ( eval { require JSON::XS; 1 } ) {
-    plan skip_all => 'JSON::XS not installed';
+    plan skip_all => 'No JSON::XS';
     done_testing;
     exit;
 }
