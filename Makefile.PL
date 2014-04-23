@@ -30,6 +30,18 @@ WriteMakefile(
     ($require_cpanel_json_xs
       ? ()
       : (prereqs => { runtime => { recommends => { 'Cpanel::JSON::XS' => '2.3310' } } })),
+
+    resources => {
+      repository => {
+        url => 'https://github.com/karenetheridge/JSON-MaybeXS.git',
+        web => 'https://github.com/karenetheridge/JSON-MaybeXS',
+        type => 'git',
+      },
+      bugtracker => {
+        mailto => 'bug-JSON-MaybeXS@rt.cpan.org',
+        web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=JSON-MaybeXS',
+      },
+    },
   },
 
   realclean => { FILES => 'Distar/' },
