@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.002001 - 2014-04-23
  - fix installation on older perls with an older ExtUtils::MakeMaker
    (RT#94964)
 
