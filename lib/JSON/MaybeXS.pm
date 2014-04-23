@@ -71,7 +71,7 @@ It then exports the C<encode_json> and C<decode_json> functions from the
 loaded module, along with a C<JSON> constant that returns the class name
 for calling C<new> on.
 
-If you're writing fresh code rather than replacing JSON.pm usage, you might
+If you're writing fresh code rather than replacing L<JSON.pm|JSON> usage, you might
 want to pass options as constructor args rather than calling mutators, so
 we provide our own C<new> method that supports that.
 
