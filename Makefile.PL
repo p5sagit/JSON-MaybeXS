@@ -47,7 +47,7 @@ my %WriteMakefileArgs = (
 my $eumm_version  = eval $ExtUtils::MakeMaker::VERSION;
 $WriteMakefileArgs{MIN_PERL_VERSION} = delete $WriteMakefileArgs{PREREQ_PM}{perl} || 0;
 $WriteMakefileArgs{BUILD_REQUIRES} = {
-    %{$WriteMakefileArgs{BUILD_REQUIRES}},
+    %{$WriteMakefileArgs{BUILD_REQUIRES} || {}},
     %{delete $WriteMakefileArgs{TEST_REQUIRES}}
 } if $eumm_version < 6.63_03;
 $WriteMakefileArgs{PREREQ_PM} = {

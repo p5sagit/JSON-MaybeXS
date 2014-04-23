@@ -1,5 +1,8 @@
 Revision history for JSON-MaybeXS
 
+ - fix installation on older perls with an older ExtUtils::MakeMaker
+   (RT#94964)
+
 1.002000 - 2014-04-22
  - Now also supports JSON::XS, when available: Cpanel::JSON::XS will only be
    installed when there is no XS backend already installed; Cpanel::JSON::XS
