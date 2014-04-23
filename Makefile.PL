@@ -31,6 +31,8 @@ WriteMakefile(
       ? ()
       : (prereqs => { runtime => { recommends => { 'Cpanel::JSON::XS' => '2.3310' } } })),
   },
+
+  realclean => { FILES => 'Distar/' },
 );
 
 # can we locate a (the) C compiler
