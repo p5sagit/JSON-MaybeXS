@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.002002 - 2014-04-23
  - more metadata fiddling, to remove the Cpanel::JSON::XS dependency visible
    to static analyzers (the prequisites at install time remain unchanged)
 
