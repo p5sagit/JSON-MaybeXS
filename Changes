@@ -1,5 +1,8 @@
 Revision history for JSON-MaybeXS
 
+ - more metadata fiddling, to remove the Cpanel::JSON::XS dependency visible
+   to static analyzers (the prequisites at install time remain unchanged)
+
 1.002001 - 2014-04-23
  - fix installation on older perls with an older ExtUtils::MakeMaker
    (RT#94964)

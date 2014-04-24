@@ -4,34 +4,36 @@ use 5.008001;
 use ExtUtils::MakeMaker;
 (do 'maint/Makefile.PL.include' or die $@) unless -f 'META.yml';
 
-# we require Cpanel::JSON::XS, except if JSON::XS is already installed.
-# (we also always recommend Cpanel::JSON::XS, just to make sure.)
-my $require_cpanel_json_xs = can_xs() && !eval { require JSON::XS; 1; };
-
 my %WriteMakefileArgs = (
   NAME => 'JSON::MaybeXS',
   VERSION_FROM => 'lib/JSON/MaybeXS.pm',
-  PREREQ_PM => {
-    'JSON::PP' => '2.27202',
-    ($require_cpanel_json_xs
-      ? ('Cpanel::JSON::XS' => '2.3310')
-      : ()),
-    perl => '5.006',
-  },
-  CONFIGURE_REQUIRES => {
-    'ExtUtils::CBuilder' => '0.27',
-    'File::Spec' => '0',
-    'File::Temp' => '0',
-  },
-  TEST_REQUIRES => {
-    'Test::Without::Module' => '0.17',
-    'Test::More' => '0.88'
-  },
-
-  META_MERGE => {
+  META_ADD => {
     'meta-spec' => { version => 2 },
     dynamic_config => 1,
-    prereqs => { runtime => { recommends => { 'Cpanel::JSON::XS' => '2.3310' } } },
+    prereqs => {
+      configure => {
+        requires => {
+          'ExtUtils::CBuilder' => '0.27',
+          'File::Spec' => '0',
+          'File::Temp' => '0',
+        },
+      },
+      runtime => {
+        requires => {
+          'JSON::PP' => '2.27202',
+          # we may also add a runtime prereq for Cpanel::JSON::XS, on the
+          # installer's machine
+          perl => '5.006',
+        },
+        recommends => { 'Cpanel::JSON::XS' => '2.3310' },
+      },
+      test => {
+        requires => {
+          'Test::Without::Module' => '0.17',
+          'Test::More' => '0.88',
+        },
+      },
+    },
 
     resources => {
       repository => {
@@ -50,6 +52,23 @@ my %WriteMakefileArgs = (
 );
 
 my $eumm_version  = eval $ExtUtils::MakeMaker::VERSION;
+
+for (qw(configure build test runtime)) {
+  my $key = $_ eq 'runtime' ? 'PREREQ_PM' : uc $_.'_REQUIRES';
+  next unless exists $WriteMakefileArgs{META_ADD}{prereqs}{$_}
+           or exists $WriteMakefileArgs{$key};
+  my $r = $WriteMakefileArgs{$key} = {
+    %{$WriteMakefileArgs{META_ADD}{prereqs}{$_}{requires} || {}},
+    %{delete $WriteMakefileArgs{$key} || {}},
+  };
+  defined $r->{$_} or delete $r->{$_} for keys %$r;
+}
+
+# we require Cpanel::JSON::XS, except if JSON::XS is already installed.
+# (we also always recommend Cpanel::JSON::XS, just to make sure.)
+$WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
+    if can_xs() && !eval { require JSON::XS; 1; };
+
 $WriteMakefileArgs{MIN_PERL_VERSION} = delete $WriteMakefileArgs{PREREQ_PM}{perl} || 0;
 
 $WriteMakefileArgs{BUILD_REQUIRES} = {
