@@ -115,7 +115,7 @@ and that object can then be used normally:
 =head2 new
 
 With L<JSON::PP>, L<JSON::XS> and L<Cpanel::JSON::XS> you are required to call
-mutators to set options, i.e.
+mutators to set options, such as:
 
   my $json = $class->new->utf8(1)->pretty(1);
 
