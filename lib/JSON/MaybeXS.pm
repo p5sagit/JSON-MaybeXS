@@ -46,7 +46,7 @@ sub new {
 
 =head1 NAME
 
-JSON::MaybeXS - use L<Cpanel::JSON::XS> with a fallback to L<JSON::XS> and L<JSON::PP>
+JSON::MaybeXS - Use L<Cpanel::JSON::XS> with a fallback to L<JSON::XS> and L<JSON::PP>
 
 =head1 SYNOPSIS
 
