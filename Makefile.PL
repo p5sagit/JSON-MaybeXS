@@ -13,6 +13,7 @@ my %WriteMakefileArgs = (
     prereqs => {
       configure => {
         requires => {
+          'ExtUtils::MakeMaker' => '0',
           'ExtUtils::CBuilder' => '0.27',
           'File::Spec' => '0',
           'File::Temp' => '0',
