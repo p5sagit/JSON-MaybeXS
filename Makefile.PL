@@ -7,9 +7,24 @@ use ExtUtils::MakeMaker;
 my %WriteMakefileArgs = (
   NAME => 'JSON::MaybeXS',
   VERSION_FROM => 'lib/JSON/MaybeXS.pm',
-  META_ADD => {
+
+  META_MERGE => {
     'meta-spec' => { version => 2 },
     dynamic_config => 1,
+    resources => {
+      repository => {
+        url => 'https://github.com/karenetheridge/JSON-MaybeXS.git',
+        web => 'https://github.com/karenetheridge/JSON-MaybeXS',
+        type => 'git',
+      },
+      bugtracker => {
+        mailto => 'bug-JSON-MaybeXS@rt.cpan.org',
+        web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=JSON-MaybeXS',
+      },
+    },
+  },
+
+  META_ADD => {
     prereqs => {
       configure => {
         requires => {
@@ -33,18 +48,6 @@ my %WriteMakefileArgs = (
           'Test::Without::Module' => '0.17',
           'Test::More' => '0.88',
         },
-      },
-    },
-
-    resources => {
-      repository => {
-        url => 'https://github.com/karenetheridge/JSON-MaybeXS.git',
-        web => 'https://github.com/karenetheridge/JSON-MaybeXS',
-        type => 'git',
-      },
-      bugtracker => {
-        mailto => 'bug-JSON-MaybeXS@rt.cpan.org',
-        web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=JSON-MaybeXS',
       },
     },
   },
