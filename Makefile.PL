@@ -67,12 +67,17 @@ for (qw(configure build test runtime)) {
   defined $r->{$_} or delete $r->{$_} for keys %$r;
 }
 
+# dynamic prereqs get added here.
+
 # we require Cpanel::JSON::XS, except if JSON::XS is already installed.
 # (we also always recommend Cpanel::JSON::XS, just to make sure.)
 $WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
     if can_xs() && !eval { require JSON::XS; 1; };
 
 $WriteMakefileArgs{MIN_PERL_VERSION} = delete $WriteMakefileArgs{PREREQ_PM}{perl} || 0;
+
+die 'attention developer: you need to do a sane meta merge here!'
+  if keys %{$WriteMakefileArgs{BUILD_REQUIRES}};
 
 $WriteMakefileArgs{BUILD_REQUIRES} = {
     %{$WriteMakefileArgs{BUILD_REQUIRES} || {}},
