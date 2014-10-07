@@ -126,6 +126,14 @@ Since this is a trifle irritating and noticeably un-perlish, we also offer:
 which works equivalently to the above (and in the usual tradition will accept
 a hashref instead of a hash, should you so desire).
 
+=head1 BOOLEANS
+
+To include JSON-aware booleans (C<true>, C<false>) in your data, just do:
+
+    use JSON::MaybeXS;
+    my $true = JSON->true;
+    my $false = JSON->false;
+
 =head1 AUTHOR
 
 mst - Matt S. Trout (cpan:MSTROUT) <mst@shadowcat.co.uk>
