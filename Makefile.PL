@@ -35,6 +35,7 @@ my %WriteMakefileArgs = (
       },
       runtime => {
         requires => {
+          'Safe::Isa' => '0',
           'JSON::PP' => '2.27202',
           # we may also add a runtime prereq for Cpanel::JSON::XS, on the
           # installer's machine

@@ -16,4 +16,6 @@ is(
   'Correct encode_json function'
 );
 
+require 't/lib/is_bool.pm';
+
 done_testing;

@@ -31,6 +31,7 @@ BEGIN {
 }
 
 our @EXPORT = qw(encode_json decode_json JSON);
+our @EXPORT_OK = qw(is_bool);
 
 sub JSON () { our $JSON_Class }
 
@@ -40,6 +41,15 @@ sub new {
   my $new = (our $JSON_Class)->new;
   $new->$_($args{$_}) for keys %args;
   return $new;
+}
+
+use Safe::Isa;
+
+sub is_bool {
+  die 'is_bool is not a method' if $_[1];
+
+  $_[0]->$_isa('JSON::XS::Boolean')
+    or $_[0]->$_isa('JSON::PP::Boolean');
 }
 
 1;
@@ -77,11 +87,12 @@ we provide our own C<new> method that supports that.
 
 =head1 EXPORTS
 
-All of C<encode_json>, C<decode_json> and C<JSON> are exported by default.
+C<encode_json>, C<decode_json> and C<JSON> are exported by default; C<is_bool>
+is exported on request.
 
 To import only some symbols, specify them on the C<use> line:
 
-  use JSON::MaybeXS qw(encode_json decode_json); # functions only
+  use JSON::MaybeXS qw(encode_json decode_json is_bool); # functions only
 
   use JSON::MaybeXS qw(JSON); # JSON constant only
 
@@ -109,6 +120,18 @@ use as a class name - so:
 and that object can then be used normally:
 
   my $data_structure = $json_obj->decode($json_text); # etc.
+
+=head2 is_bool
+
+  $is_boolean = is_bool($scalar)
+
+Returns true if the passed scalar represents either C<true> or
+C<false>, two constants that act like C<1> and C<0>, respectively
+and are used to represent JSON C<true> and C<false> values in Perl.
+
+Since this is a bare sub in the various backend classes, it cannot be called as
+a class method like the other interfaces; it must be called as a function, with
+no invocant.  It supports the representation used in all JSON backends.
 
 =head1 CONSTRUCTOR
 
