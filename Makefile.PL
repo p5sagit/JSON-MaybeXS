@@ -70,7 +70,8 @@ for (qw(configure build test runtime)) {
 # we require Cpanel::JSON::XS, except if JSON::XS is already installed.
 # (we also always recommend Cpanel::JSON::XS, just to make sure.)
 $WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
-    if can_xs() && !eval { require JSON::XS; 1; };
+    if not parse_args()->{PUREPERL_ONLY}
+        && not eval { require JSON::XS; 1; } && can_xs();
 
 $WriteMakefileArgs{MIN_PERL_VERSION} = delete $WriteMakefileArgs{PREREQ_PM}{perl} || 0;
 
@@ -100,6 +101,19 @@ delete $WriteMakefileArgs{LICENSE}
   if $eumm_version < 6.31;
 
 WriteMakefile(%WriteMakefileArgs);
+
+
+sub parse_args {
+  # copied from EUMM
+  require ExtUtils::MakeMaker;
+  require Text::ParseWords;
+  ExtUtils::MakeMaker::parse_args(
+    my $tmp = {},
+    Text::ParseWords::shellwords($ENV{PERL_MM_OPT} || ''),
+    @ARGV,
+  );
+  return $tmp->{ARGS} || {};
+}
 
 # can we locate a (the) C compiler
 sub can_cc {

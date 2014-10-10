@@ -1,5 +1,8 @@
 Revision history for JSON-MaybeXS
 
+ - support use of PUREPERL_ONLY in Makefile.PL to avoid adding an XS
+   dependency
+
 1.002003 - 2014-10-07
  - document how to use booleans
 
