@@ -7,8 +7,6 @@ use JSON::MaybeXS;
 
 unless ( eval { require JSON::XS; 1 } ) {
     plan skip_all => 'No JSON::XS';
-    done_testing;
-    exit;
 }
 
 is( JSON, 'JSON::XS', 'Correct JSON class' );

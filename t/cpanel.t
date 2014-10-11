@@ -5,8 +5,6 @@ use JSON::MaybeXS;
 
 unless ( eval { require Cpanel::JSON::XS; 1 } ) {
     plan skip_all => 'No Cpanel::JSON::XS';
-    done_testing;
-    exit;
 }
 
 is( JSON, 'Cpanel::JSON::XS', 'Correct JSON class' );
