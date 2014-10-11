@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.002004 - 2014-10-11
  - support use of PUREPERL_ONLY in Makefile.PL to avoid adding an XS
    dependency
  - new is_bool() interface
