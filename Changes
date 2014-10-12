@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.002005 - 2014-10-12
  - fix "can I haz XS?" logic precedence in Makefile.PL
  - added the ':all' export tag
  - removed dependency on Safe::Isa
