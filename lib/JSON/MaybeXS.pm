@@ -32,6 +32,7 @@ BEGIN {
 
 our @EXPORT = qw(encode_json decode_json JSON);
 our @EXPORT_OK = qw(is_bool);
+our %EXPORT_TAGS = ( all => [ @EXPORT, @EXPORT_OK ] );
 
 sub JSON () { our $JSON_Class }
 
@@ -95,6 +96,10 @@ To import only some symbols, specify them on the C<use> line:
   use JSON::MaybeXS qw(encode_json decode_json is_bool); # functions only
 
   use JSON::MaybeXS qw(JSON); # JSON constant only
+
+To import all available symbols, use C<:all>:
+
+  use JSON::MaybeXS ':all';
 
 =head2 encode_json
 
