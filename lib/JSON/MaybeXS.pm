@@ -44,13 +44,14 @@ sub new {
   return $new;
 }
 
-use Safe::Isa;
+use Scalar::Util ();
 
 sub is_bool {
   die 'is_bool is not a method' if $_[1];
 
-  $_[0]->$_isa('JSON::XS::Boolean')
-    or $_[0]->$_isa('JSON::PP::Boolean');
+  Scalar::Util::blessed($_[0])
+    and ($_[0]->isa('JSON::XS::Boolean')
+      or $_[0]->isa('JSON::PP::Boolean'));
 }
 
 1;
