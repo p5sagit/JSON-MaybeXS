@@ -11,9 +11,10 @@ my %WriteMakefileArgs = (
     'meta-spec' => { version => 2 },
     dynamic_config => 1,
     resources => {
+    # r/w: p5sagit@git.shadowcat.co.uk:JSON-MaybeXS.git
       repository => {
-        url => 'https://github.com/karenetheridge/JSON-MaybeXS.git',
-        web => 'https://github.com/karenetheridge/JSON-MaybeXS',
+        url => 'git://git.shadowcat.co.uk/p5sagit/JSON-MaybeXS.git',
+        web => 'http://git.shadowcat.co.uk/gitweb/gitweb.cgi?p=p5sagit/JSON-MaybeXS.git',
         type => 'git',
       },
       bugtracker => {
