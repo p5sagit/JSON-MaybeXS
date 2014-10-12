@@ -1,5 +1,7 @@
 Revision history for JSON-MaybeXS
 
+ - fix "can I haz XS?" logic precedence in Makefile.PL
+
 1.002004 - 2014-10-11
  - support use of PUREPERL_ONLY in Makefile.PL to avoid adding an XS
    dependency
