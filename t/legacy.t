@@ -5,15 +5,26 @@ use Test::Without::Module 'Cpanel::JSON::XS';
 use Test::More;
 use JSON::MaybeXS qw/:legacy/;
 
-
-
 my $in = '[1, 2, 3, 4]';
-
 
 my $arr = from_json($in);
 my $j = to_json($arr);
 is($j, '[1,2,3,4]');
 is(ref($arr), 'ARRAY');
+
+my $json = 'JSON::MaybeXS';
+diag "using invocant: $json";
+like(
+    do { eval { $json->from_json($in) }; $@ },
+    qr/from_json should not be called as a method/,
+    'blessed invocant detected in from_json',
+);
+
+like(
+    do { eval { $json->to_json($arr, { blah => 1 } ) }; $@ },
+    qr/to_json should not be called as a method/,
+    'blessed invocant detected in to_json',
+);
 
 done_testing;
 
