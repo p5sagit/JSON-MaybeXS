@@ -4,6 +4,8 @@ use if !eval { require Cpanel::JSON::XS; 1; }, 'Test::More', skip_all => 'No Cpa
 use Test::More;
 use JSON::MaybeXS;
 
+diag 'Using Cpanel::JSON::XS ', Cpanel::JSON::XS->VERSION;
+
 is(JSON, 'Cpanel::JSON::XS', 'Correct JSON class');
 
 is(

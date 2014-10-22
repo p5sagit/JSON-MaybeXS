@@ -5,6 +5,9 @@ use Test::More;
 use JSON::MaybeXS;
 
 my $data = JSON::MaybeXS->new->decode('{"foo": true, "bar": false, "baz": 1}');
+diag 'true is: ', explain $data->{foo};
+diag 'false is: ', explain $data->{bar};
+
 ok(
     JSON::MaybeXS::is_bool($data->{foo}),
     JSON() . ': true decodes to a bool',

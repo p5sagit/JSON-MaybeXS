@@ -9,6 +9,8 @@ unless ( eval { require JSON::XS; 1 } ) {
     plan skip_all => 'No JSON::XS';
 }
 
+diag 'Using JSON::XS ', JSON::XS->VERSION;
+
 is( JSON, 'JSON::XS', 'Correct JSON class' );
 
 is( \&encode_json, \&JSON::XS::encode_json, 'Correct encode_json function' );

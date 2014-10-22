@@ -1,8 +1,11 @@
 use strict;
 use warnings FATAL => 'all';
+
 use if !eval { require JSON::XS; 1; }, 'Test::More', skip_all => 'No JSON::XS';
 use Test::More;
 use JSON::MaybeXS;
+
+diag 'Using JSON::XS ', JSON::XS->VERSION;
 
 is( JSON, 'JSON::XS', 'Correct JSON class' );
 
