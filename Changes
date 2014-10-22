@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.002006 - 2014-10-22
  - add some additional test diagnostics, to help find bad version combinations
    of JSON backends
 
