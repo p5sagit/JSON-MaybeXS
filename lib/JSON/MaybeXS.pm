@@ -2,9 +2,14 @@ package JSON::MaybeXS;
 
 use strict;
 use warnings FATAL => 'all';
+use Carp;
 use base qw(Exporter);
 
-our $VERSION = '1.002006';
+
+use YAML;
+
+
+our $VERSION = '1.003000';
 
 sub _choose_json_module {
     return 'Cpanel::JSON::XS' if $INC{'Cpanel/JSON/XS.pm'};
@@ -31,8 +36,12 @@ BEGIN {
 }
 
 our @EXPORT = qw(encode_json decode_json JSON);
-our @EXPORT_OK = qw(is_bool);
-our %EXPORT_TAGS = ( all => [ @EXPORT, @EXPORT_OK ] );
+our @EXPORT_ALL = qw/is_bool/;
+our @EXPORT_OK = qw(is_bool to_json from_json);
+our %EXPORT_TAGS = ( all    => [ @EXPORT, @EXPORT_ALL ],
+                                        legacy => [ @EXPORT, @EXPORT_OK],
+                                  );
+
 
 sub JSON () { our $JSON_Class }
 
@@ -53,6 +62,46 @@ sub is_bool {
     and ($_[0]->isa('JSON::XS::Boolean')
       or $_[0]->isa('JSON::PP::Boolean'));
 }
+
+# CopyPasta from JSON.pm version 2.90
+
+sub from_json ($@) {
+    if ( ref($_[0]) eq 'JSON' or $_[0] eq 'JSON' ) {
+        Carp::croak "from_json should not be called as a method.";
+    }
+    my $json = JSON->new;
+
+    if (@_ == 2 and ref $_[1] eq 'HASH') {
+        my $opt  = $_[1];
+        for my $method (keys %$opt) {
+            $json->$method( $opt->{$method} );
+        }
+    }
+
+    return $json->decode( $_[0] );
+}
+
+sub to_json ($@) {
+    if (
+        ref($_[0]) eq 'JSON'
+        or (@_ > 2 and $_[0] eq 'JSON')
+          ) {
+               Carp::croak "to_json should not be called as a method.";
+    }
+    my $json = JSON->new;
+
+    if (@_ == 2 and ref $_[1] eq 'HASH') {
+        my $opt  = $_[1];
+        for my $method (keys %$opt) {
+            $json->$method( $opt->{$method} );
+        }
+    }
+
+    $json->encode($_[0]);
+}
+
+
+
 
 1;
 
@@ -98,9 +147,21 @@ To import only some symbols, specify them on the C<use> line:
 
   use JSON::MaybeXS qw(JSON); # JSON constant only
 
-To import all available symbols, use C<:all>:
+To import all available sensible (encode_json, decode_json and
+is_bool) symbols, use C<:all>:
 
   use JSON::MaybeXS ':all';
+
+To import all symbols including those needed by legacy apps that use JSON::PP:
+
+  use JSON::MaybeXS ':legacy';
+
+This imports to_json and from_json symbols as well as everything in
+C< :all >.  NOTE: This is to support legacy code that makes extensive
+use of to_json and from_json which you are not yet in a position to
+refactor.  DO NOT use this import tag in new code, in order to avoid
+the crawling horrors of getting UTF8 support subtly wrong.  See the
+documentation for L<JSON> for further details.
 
 =head2 encode_json
 
@@ -115,6 +176,11 @@ This is the C<decode_json> function provided by the selected implementation
 module, and takes a string of JSON text to deserialise to a perl data structure.
 
   my $data_structure = decode_json($json_text);
+
+=head2 to_json, from_json
+
+See L< JSON > for details.  These are included to support legacy code
+B<only>.
 
 =head2 JSON
 
