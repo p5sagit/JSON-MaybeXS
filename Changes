@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.003_000 - 2014-10-30
  - add :legacy tag to support legacy apps
 
 1.002006 - 2014-10-22
