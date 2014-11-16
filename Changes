@@ -1,5 +1,7 @@
 Revision history for JSON-MaybeXS
 
+ - correctly fix boolean interoperability with older Cpanel::JSON::MaybeXS
+
 1.003001 - 2014-11-13
  - fix boolean interoperability with older Cpanel::JSON::MaybeXS
 
