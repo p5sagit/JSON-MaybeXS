@@ -74,8 +74,8 @@ for (qw(configure build test runtime)) {
 # (we also always recommend Cpanel::JSON::XS, just to make sure.)
 $WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
     if not parse_args()->{PUREPERL_ONLY}
-        and not eval { require JSON::XS; 1; }
-        and can_xs();
+        and ((eval { require Cpanel::JSON::XS; 1 } and not eval { Cpanel::JSON::XS->VERSION('2.3310'); 1 })
+            or (not eval { require JSON::XS; 1; } and can_xs()));
 
 $WriteMakefileArgs{MIN_PERL_VERSION} = delete $WriteMakefileArgs{PREREQ_PM}{perl} || 0;
 
