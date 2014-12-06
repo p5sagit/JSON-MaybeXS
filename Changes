@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.003003 - 2014-12-06
  - ensure an old Cpanel::JSON::XS is upgraded if it is too old, as it will
    always be used in preference to JSON::XS
  - avoid "JSON::XS::Boolean::* redefined" warnings caused by an old JSON::XS
