@@ -22,6 +22,13 @@ my %WriteMakefileArgs = (
         web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=JSON-MaybeXS',
       },
     },
+    x_contributors => { # manually added, from git shortlog -e -s
+      'Clinton Gormley <develop@traveljury.com>',
+      'Graham Knop <haarg@haarg.org>',
+      'Karen Etheridge <ether@cpan.org>',
+      'Kieren Diment <diment@gmail.com>',
+      'Matt S Trout <mst@shadowcat.co.uk>',
+    },
   },
 
   META_ADD => {
