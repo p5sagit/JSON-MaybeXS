@@ -223,6 +223,27 @@ To include JSON-aware booleans (C<true>, C<false>) in your data, just do:
     my $true = JSON->true;
     my $false = JSON->false;
 
+=head1 CAVEATS
+
+The C<new()> method in this module is technically a factory, not a
+constructor, because the objects it returns will I<NOT> be blessed into the
+C<JSON::MaybeXS> class.
+
+If you are using an object returned by this module as a Moo(se) attribute,
+this type constraint code:
+
+    is 'json' => ( isa => 'JSON::MaybeXS' );
+
+will I<NOT> do what you expect. Instead, either rely on the C<JSON> class
+constant described above, as so:
+
+    is 'json' => ( isa => JSON::MaybeXS::JSON() );
+
+Alternatively, you can use duck typing:
+
+    use Moose::Util::TypeConstraints;
+    is 'json' => ( isa => Object , duck_type([qw/ encode decode /]));
+
 =head1 AUTHOR
 
 mst - Matt S. Trout (cpan:MSTROUT) <mst@shadowcat.co.uk>
