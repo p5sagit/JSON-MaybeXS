@@ -7,8 +7,8 @@
 /MANIFEST.bak
 /blib/
 /pm_to_blib
-/.build/
-!.gitignore
+/_eumm/
+!/.gitignore
 *.bs
 /xs/*.c
 *.o
@@ -16,9 +16,6 @@
 *.gc??
 /test-mydeps-*
 /nytprof*
-/inc/
-.*.sw[a-z]
-/JSON-MaybeXS-*
-/todo.txt
-/todo/
+/JSON-MaybeXS-*/
+/JSON-MaybeXS-*.tar.gz
 /Distar*
