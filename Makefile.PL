@@ -25,6 +25,7 @@ my %WriteMakefileArgs = (
     x_contributors => { # manually added, from git shortlog -e -s
       'Clinton Gormley <develop@traveljury.com>',
       'Graham Knop <haarg@haarg.org>',
+      'John SJ Anderson <genehack@genehack.org>',
       'Karen Etheridge <ether@cpan.org>',
       'Kieren Diment <diment@gmail.com>',
       'Matt S Trout <mst@shadowcat.co.uk>',

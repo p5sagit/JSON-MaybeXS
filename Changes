@@ -1,5 +1,8 @@
 Revision history for JSON-MaybeXS
 
+ - caveat added to documentation about type checking the object returned by
+   new() (John SJ Anderson, RT#102733)
+
 1.003003 - 2014-12-06
  - ensure an old Cpanel::JSON::XS is upgraded if it is too old, as it will
    always be used in preference to JSON::XS
