@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.003004 - 2015-03-14
  - caveat added to documentation about type checking the object returned by
    new() (John SJ Anderson, RT#102733)
 
