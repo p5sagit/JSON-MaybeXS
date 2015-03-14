@@ -1,5 +1,5 @@
 use strict;
-use warnings FATAL => 'all';
+use warnings;
 use Test::More;
 
 unless ( eval { require JSON; 1 } ) {

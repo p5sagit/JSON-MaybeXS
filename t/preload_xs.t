@@ -1,5 +1,5 @@
 use strict;
-use warnings FATAL => 'all';
+use warnings;
 
 use if !eval { require JSON::XS; 1; }, 'Test::More', skip_all => 'No JSON::XS';
 use Test::More;

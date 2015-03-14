@@ -1,5 +1,5 @@
 use strict;
-use warnings FATAL => 'all';
+use warnings;
 
 use Test::Without::Module 'Cpanel::JSON::XS', 'JSON::XS';
 use if !eval { require JSON::PP; 1; }, 'Test::More', skip_all => 'No JSON::PP';

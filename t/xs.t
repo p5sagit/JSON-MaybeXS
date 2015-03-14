@@ -1,5 +1,5 @@
 use strict;
-use warnings FATAL => 'all';
+use warnings;
 
 use Test::Without::Module 'Cpanel::JSON::XS';
 use Test::More;
