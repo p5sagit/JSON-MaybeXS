@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.003005 - 2015-03-22
  - fix x_contributors metadata that was killing metacpan (see
    https://github.com/CPAN-API/cpan-api/issues/401)
 
