@@ -241,7 +241,7 @@ constant described above, as so:
 
 Alternatively, you can use duck typing:
 
-    use Moose::Util::TypeConstraints;
+    use Moose::Util::TypeConstraints 'duck_type';
     is 'json' => ( isa => Object , duck_type([qw/ encode decode /]));
 
 =head1 AUTHOR
