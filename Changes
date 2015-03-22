@@ -1,5 +1,8 @@
 Revision history for JSON-MaybeXS
 
+ - fix x_contributors metadata that was killing metacpan (see
+   https://github.com/CPAN-API/cpan-api/issues/401)
+
 1.003004 - 2015-03-14
  - caveat added to documentation about type checking the object returned by
    new() (John SJ Anderson, RT#102733)
