@@ -223,6 +223,33 @@ To include JSON-aware booleans (C<true>, C<false>) in your data, just do:
     my $true = JSON->true;
     my $false = JSON->false;
 
+=head1 CONVERTING FROM JSON::Any
+
+L<JSON::Any> used to be the favoured compatibility layer above the various
+JSON backends, but over time has grown a lot of extra code to deal with legacy
+backends (e.g. L<JSON::Syck>) that are no longer needed.  This is a rough guide of translating such code:
+
+Change code from:
+
+    use JSON::Any;
+    my $json = JSON::Any->new->objToJson($data);    # or to_json($data), or Dump($data)
+
+to:
+
+    use JSON::MaybeXS;
+    my $json = encode_json($data);
+
+
+Change code from:
+
+    use JSON::Any;
+    my $data = JSON::Any->new->jsonToObj($json);    # or from_json($json), or Load($json)
+
+to:
+
+    use JSON::MaybeXS;
+    my $json = decode_json($data);
+
 =head1 CAVEATS
 
 The C<new()> method in this module is technically a factory, not a
