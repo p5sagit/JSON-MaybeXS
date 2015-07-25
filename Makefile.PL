@@ -22,7 +22,7 @@ my %WriteMakefileArgs = (
         web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=JSON-MaybeXS',
       },
     },
-    x_contributors => [ # manually added, from git shortlog -e -s
+    x_contributors => [ # manually added, from git shortlog -e -s -n
       'Clinton Gormley <develop@traveljury.com>',
       'Graham Knop <haarg@haarg.org>',
       'John SJ Anderson <genehack@genehack.org>',
