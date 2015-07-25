@@ -154,7 +154,7 @@ This imports the C<to_json> and C<from_json> symbols as well as everything in
 C<:all>.  NOTE: This is to support legacy code that makes extensive
 use of C<to_json> and C<from_json> which you are not yet in a position to
 refactor.  DO NOT use this import tag in new code, in order to avoid
-the crawling horrors of getting UTF8 support subtly wrong.  See the
+the crawling horrors of getting UTF-8 support subtly wrong.  See the
 documentation for L<JSON> for further details.
 
 =head2 encode_json
