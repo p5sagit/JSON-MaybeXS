@@ -78,10 +78,12 @@ for (qw(configure build test runtime)) {
 
 # dynamic prereqs get added here.
 
+my $args = parse_args();
+
 # we require Cpanel::JSON::XS, except if JSON::XS is already installed.
 # (we also always recommend Cpanel::JSON::XS, just to make sure.)
 $WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
-    if not parse_args()->{PUREPERL_ONLY}
+    if not $args->{PUREPERL_ONLY}
         and ((eval { require Cpanel::JSON::XS; 1 } and not eval { Cpanel::JSON::XS->VERSION('2.3310'); 1 })
             or (not eval { require JSON::XS; 1; } and can_xs()));
 
@@ -91,7 +93,7 @@ $WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
 # and Cpanel::JSON::JSON is (or is about to be) >= 3.0,
 # then update JSON::XS to eliminate the incompatibility
 $WriteMakefileArgs{PREREQ_PM}{'JSON::XS'} = '3.00'
-    if not parse_args()->{PUREPERL_ONLY}
+    if not $args->{PUREPERL_ONLY}
         and eval { require JSON::XS; 1 } and not eval { JSON::XS->VERSION('3.0'); 1 }
         and (eval { require Cpanel::JSON::XS; Cpanel::JSON::XS->VERSION('3.0'); 1 }
             # we presume here that if we are installing Cpanel::JSON::XS, we
