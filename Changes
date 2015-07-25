@@ -1,5 +1,8 @@
 Revision history for JSON-MaybeXS
 
+ - bump prereq on JSON::PP, to ensure we get the fix for parsing utf8-encoded
+   values
+
 1.003005 - 2015-03-22
  - fix x_contributors metadata that was killing metacpan (see
    https://github.com/CPAN-API/cpan-api/issues/401)

@@ -46,7 +46,7 @@ my %WriteMakefileArgs = (
         requires => {
           'Scalar::Util' => '0',
           'Carp' => '0',
-          'JSON::PP' => '2.27202',
+          'JSON::PP' => '2.27300',
           # we may also add a runtime prereq for Cpanel::JSON::XS, on the
           # installer's machine
           perl => '5.006',
