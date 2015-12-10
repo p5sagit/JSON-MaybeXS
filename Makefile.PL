@@ -90,7 +90,7 @@ $WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
 # avoid "JSON::XS::Boolean::* redefined" warnings caused by incompatibilities
 # between JSON::XS 2.x and 3.0 --
 # if JSON::XS is installed and < 3.0
-# and Cpanel::JSON::JSON is (or is about to be) >= 3.0,
+# and Cpanel::JSON::XS is (or is about to be) >= 3.0,
 # then update JSON::XS to eliminate the incompatibility
 $WriteMakefileArgs{PREREQ_PM}{'JSON::XS'} = '3.00'
     if not $args->{PUREPERL_ONLY}
