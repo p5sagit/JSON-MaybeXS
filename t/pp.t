@@ -15,10 +15,15 @@ is(
   'Correct encode_json function'
 );
 
-is(
-  \&decode_json, \&JSON::PP::decode_json,
-  'Correct encode_json function'
-);
+is prototype \&decode_json, '$',
+  'decode_json has correct prototype';
+
+is_deeply decode_json '[]', [],
+  'decode_json works as expected';
+
+eval { decode_json undef }; my $msg = ' at ' . __FILE__ . ' line ' . __LINE__;
+like $@, qr/\Q$msg\E/,
+  'decode_json reports error at correct location';
 
 require 't/lib/is_bool.pm';
 

@@ -28,7 +28,20 @@ sub _choose_json_module {
 
 BEGIN {
     our $JSON_Class = _choose_json_module();
-    $JSON_Class->import(qw(encode_json decode_json));
+
+    if ($JSON_Class eq 'JSON::PP') {
+        $JSON_Class->import(qw(encode_json));
+        eval '#line ' . __LINE__ . ' "' . __FILE__ . '"' . q{
+            package JSON::PP;
+            sub JSON::MaybeXS::decode_json ($) {
+                &decode_json;
+            }
+            1;
+        } or die $@;
+    }
+    else {
+        $JSON_Class->import(qw(encode_json decode_json));
+    }
 }
 
 our @EXPORT = qw(encode_json decode_json JSON);
