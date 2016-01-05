@@ -3,7 +3,7 @@ use warnings;
 use Test::Without::Module 'Cpanel::JSON::XS';
 use Test::Without::Module 'JSON::XS';
 use Test::Without::Module 'JSON::PP';
-use Test::More;
+use Test::More 0.88;
 
 ok(!eval { require JSON::MaybeXS; 1 }, 'Class failed to load');
 

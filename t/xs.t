@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use Test::Without::Module 'Cpanel::JSON::XS';
-use Test::More;
+use Test::More 0.88;
 use JSON::MaybeXS;
 
 unless ( eval { require JSON::XS; 1 } ) {
