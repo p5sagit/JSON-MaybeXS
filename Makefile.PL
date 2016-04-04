@@ -30,6 +30,7 @@ my %WriteMakefileArgs = (
       'Kieren Diment <diment@gmail.com>',
       'Matt S Trout <mst@shadowcat.co.uk>',
     ],
+    keywords => [ qw(json serializer serialiser data) ],
   },
 
   META_ADD => {
