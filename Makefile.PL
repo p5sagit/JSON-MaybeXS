@@ -11,10 +11,14 @@ my %WriteMakefileArgs = (
     'meta-spec' => { version => 2 },
     dynamic_config => 1,
     resources => {
-    # r/w: p5sagit@git.shadowcat.co.uk:JSON-MaybeXS.git
+      # GitHub mirrors from Shadowcat. We list it so we can get pull requests.
+      # The canonical repo is:
+      # r/o: git://git.shadowcat.co.uk/p5sagit/JSON-MaybeXS.git
+      # r/w: p5sagit@git.shadowcat.co.uk:JSON-MaybeXS.git
+      # web: http://git.shadowcat.co.uk/gitweb/gitweb.cgi?p=p5sagit/JSON-MaybeXS.git
       repository => {
-        url => 'git://git.shadowcat.co.uk/p5sagit/JSON-MaybeXS.git',
-        web => 'http://git.shadowcat.co.uk/gitweb/gitweb.cgi?p=p5sagit/JSON-MaybeXS.git',
+        url => 'https://github.com/p5sagit/JSON-MaybeXS.git',
+        web => 'https://github.com/p5sagit/JSON-MaybeXS',
         type => 'git',
       },
       bugtracker => {
