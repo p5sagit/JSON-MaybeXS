@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.003006_001 - 2016-06-28
  - bump prereq on JSON::PP, to ensure we get the fix for parsing utf8-encoded
    values
  - we now always upgrade JSON::XS if it is installed and below version 3.0,
