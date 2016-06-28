@@ -81,25 +81,25 @@ for (qw(configure build test runtime)) {
 
 my $args = parse_args();
 
-# we require Cpanel::JSON::XS, except if JSON::XS is already installed.
-# (we also always recommend Cpanel::JSON::XS, just to make sure.)
-$WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
-    if not $args->{PUREPERL_ONLY}
-        and ((eval { require Cpanel::JSON::XS; 1 } and not eval { Cpanel::JSON::XS->VERSION('2.3310'); 1 })
-            or (not eval { require JSON::XS; 1; } and can_xs()));
+if (not $args->{PUREPERL_ONLY}) {
+    # we require Cpanel::JSON::XS, except if JSON::XS is already installed.
+    # (we also always recommend Cpanel::JSON::XS, just to make sure.)
+    $WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
+        if (eval { require Cpanel::JSON::XS; 1 } and not eval { Cpanel::JSON::XS->VERSION('2.3310'); 1 })
+            or (not eval { require JSON::XS; 1; } and can_xs());
 
-# avoid "JSON::XS::Boolean::* redefined" warnings caused by incompatibilities
-# between JSON::XS 2.x and 3.0 --
-# if JSON::XS is installed and < 3.0
-# and Cpanel::JSON::XS is (or is about to be) >= 3.0,
-# then update JSON::XS to eliminate the incompatibility
-$WriteMakefileArgs{PREREQ_PM}{'JSON::XS'} = '3.00'
-    if not $args->{PUREPERL_ONLY}
-        and eval { require JSON::XS; 1 } and not eval { JSON::XS->VERSION('3.0'); 1 }
-        and (eval { require Cpanel::JSON::XS; Cpanel::JSON::XS->VERSION('3.0'); 1 }
-            # we presume here that if we are installing Cpanel::JSON::XS, we
-            # are installing the latest version
-            or exists $WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'});
+    # avoid "JSON::XS::Boolean::* redefined" warnings caused by incompatibilities
+    # between JSON::XS 2.x and 3.0 --
+    # if JSON::XS is installed and < 3.0
+    # and Cpanel::JSON::XS is (or is about to be) >= 3.0,
+    # then update JSON::XS to eliminate the incompatibility
+    $WriteMakefileArgs{PREREQ_PM}{'JSON::XS'} = '3.00'
+        if eval { require JSON::XS; 1 } and not eval { JSON::XS->VERSION('3.0'); 1 }
+            and (eval { require Cpanel::JSON::XS; Cpanel::JSON::XS->VERSION('3.0'); 1 }
+                # we presume here that if we are installing Cpanel::JSON::XS, we
+                # are installing the latest version
+                or exists $WriteMakefileArgs{PREREQ_PM}{'Cpanel::JSON::XS'});
+}
 
 $WriteMakefileArgs{MIN_PERL_VERSION} = delete $WriteMakefileArgs{PREREQ_PM}{perl} || 0;
 
