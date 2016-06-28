@@ -4,6 +4,7 @@ Revision history for JSON-MaybeXS
    values
  - we now always upgrade JSON::XS if it is installed and below version 3.0,
    due to changes in handling booleans
+ - remove test dependency on Test::Without::Module (RT#115394)
 
 1.003005 - 2015-03-22
  - fix x_contributors metadata that was killing metacpan (see

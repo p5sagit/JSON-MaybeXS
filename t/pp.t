@@ -1,7 +1,12 @@
 use strict;
 use warnings;
 
-use Test::Without::Module 'Cpanel::JSON::XS', 'JSON::XS';
+# hide Cpanel::JSON::XS, JSON::XS
+use lib map {
+    my ( $m, $c ) = ( $_, qq{die "Can't locate $_ (hidden)\n"} );
+    sub { return unless $_[1] eq $m; open my $fh, "<", \$c; return $fh }
+} qw{Cpanel/JSON/XS.pm JSON/XS.pm};
+
 use if !eval { require JSON::PP; 1; }, 'Test::More', skip_all => 'No JSON::PP';
 use Test::More 0.88;
 use JSON::MaybeXS;

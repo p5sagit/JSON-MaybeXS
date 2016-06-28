@@ -60,7 +60,6 @@ my %WriteMakefileArgs = (
       },
       test => {
         requires => {
-          'Test::Without::Module' => '0.17',
           'Test::More' => '0.88',
         },
       },
