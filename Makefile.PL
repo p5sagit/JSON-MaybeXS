@@ -7,7 +7,7 @@ my %WriteMakefileArgs = (
   NAME => 'JSON::MaybeXS',
   VERSION_FROM => 'lib/JSON/MaybeXS.pm',
 
-  META_ADD => {
+  META_MERGE => {
     'meta-spec' => { version => 2 },
     dynamic_config => 1,
     resources => {
@@ -35,7 +35,10 @@ my %WriteMakefileArgs = (
       'Matt S Trout <mst@shadowcat.co.uk>',
     ],
     keywords => [ qw(json serializer serialiser data) ],
+  },
 
+  META_ADD => {
+    'meta-spec' => { version => 2 },
     prereqs => {
       configure => {
         requires => {
