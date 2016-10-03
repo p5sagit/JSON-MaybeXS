@@ -1,5 +1,7 @@
 Revision history for JSON-MaybeXS
 
+ - fix tests to no longer rely on . being in @INC (RT#120404)
+
 1.003008 - 2016-10-03
  - added an INSTALLATION section to documentation, to clarify the use of
    dynamic prerequisites in Makefile.PL
