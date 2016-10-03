@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.003008 - 2016-10-03
  - added an INSTALLATION section to documentation, to clarify the use of
    dynamic prerequisites in Makefile.PL
  - minimize prereqs listed in META.json to avoid giving the appearance of XS
