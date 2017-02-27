@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.003009 - 2017-02-27
  - fix tests to no longer rely on . being in @INC (RT#120404)
 
 1.003008 - 2016-10-03
