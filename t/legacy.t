@@ -42,7 +42,7 @@ __END__
 
     This function call is functionally identical to:
 
-       $json_text = JSON->new->encode($perl_scalar)
+       $json_text = JSON()->new->encode($perl_scalar)
 
   from_json
        $perl_scalar = from_json($json_text)
@@ -52,4 +52,4 @@ __END__
 
     This function call is functionally identical to:
 
-        $perl_scalar = JSON->decode($json_text)
+        $perl_scalar = JSON()->decode($json_text)
