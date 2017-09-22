@@ -6,6 +6,8 @@ unless ( eval { require JSON; 1 } ) {
     plan skip_all => 'No JSON';
 }
 
+use JSON::MaybeXS;
+
 my $data = JSON()->new->decode('{"foo": true, "bar": false, "baz": 1}');
 
 ok(
