@@ -9,15 +9,15 @@ $VERSION = eval $VERSION;
 
 sub _choose_json_module {
     return 'Cpanel::JSON::XS' if $INC{'Cpanel/JSON/XS.pm'};
-    return 'JSON::XS'         if $INC{'JSON/XS.pm'};
+    return 'JSON::XS'         if $INC{'JSON/XS.pm'} and $ENV{PERL_JSON_XS_USE};
 
     my @err;
 
     return 'Cpanel::JSON::XS' if eval { require Cpanel::JSON::XS };
     push @err, "Error loading Cpanel::JSON::XS: $@";
 
-    return 'JSON::XS' if eval { require JSON::XS };
-    push @err, "Error loading JSON::XS: $@";
+    return 'JSON::XS' if $ENV{PERL_JSON_XS_USE} and eval { require JSON::XS };
+    push @err, "Error loading JSON::XS: $@" if $ENV{PERL_JSON_XS_USE};
 
     return 'JSON::PP' if eval { require JSON::PP };
     push @err, "Error loading JSON::PP: $@";
@@ -101,7 +101,7 @@ sub to_json ($@) {
 
 =head1 NAME
 
-JSON::MaybeXS - Use L<Cpanel::JSON::XS> with a fallback to L<JSON::XS> and L<JSON::PP>
+JSON::MaybeXS - Use L<Cpanel::JSON::XS> with a fallback to maybe L<JSON::XS>, and L<JSON::PP>
 
 =head1 SYNOPSIS
 
@@ -118,9 +118,11 @@ JSON::MaybeXS - Use L<Cpanel::JSON::XS> with a fallback to L<JSON::XS> and L<JSO
 =head1 DESCRIPTION
 
 This module first checks to see if either L<Cpanel::JSON::XS> or
-L<JSON::XS> is already loaded, in which case it uses that module. Otherwise
-it tries to load L<Cpanel::JSON::XS>, then L<JSON::XS>, then L<JSON::PP>
-in order, and either uses the first module it finds or throws an error.
+L<JSON::XS> is already loaded (but see L<note|/"NOTE ON JSON::XS">),
+in which case it uses that module. Otherwise it tries to load
+L<Cpanel::JSON::XS>, then L<JSON::XS> (see L<note|/"NOTE ON JSON::XS">),
+then L<JSON::PP> in order, and either uses the first module it finds or
+throws an error.
 
 It then exports the C<encode_json> and C<decode_json> functions from the
 loaded module, along with a C<JSON> constant that returns the class name
@@ -201,6 +203,11 @@ and are used to represent JSON C<true> and C<false> values in Perl.
 Since this is a bare sub in the various backend classes, it cannot be called as
 a class method like the other interfaces; it must be called as a function, with
 no invocant.  It supports the representation used in all JSON backends.
+
+=head1 NOTE ON JSON::XS
+
+As of version 1.003010, JSON::MaybeXS will not use L<JSON::XS> unless
+the environment variable C<PERL_JSON_XS_USE> is set to a true value.
 
 =head1 CONSTRUCTOR
 

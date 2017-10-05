@@ -10,7 +10,7 @@ use lib map {
 use Test::More 0.88;
 use JSON::MaybeXS;
 
-unless ( eval { require JSON::XS; 1 } ) {
+unless ( $ENV{PERL_JSON_XS_USE} and eval { require JSON::XS; 1 } ) {
     plan skip_all => 'No JSON::XS';
 }
 

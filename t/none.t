@@ -3,7 +3,11 @@ use warnings;
 
 my @BACKENDS;
 BEGIN {
-    @BACKENDS = ('Cpanel/JSON/XS.pm', 'JSON/XS.pm', 'JSON/PP.pm');
+    @BACKENDS = (
+      'Cpanel/JSON/XS.pm',
+      ($ENV{PERL_JSON_XS_USE} ? 'JSON/XS.pm' : ()),
+      'JSON/PP.pm',
+    );
 }
 
 # hide Cpanel::JSON::XS, JSON::XS, JSON::PP
