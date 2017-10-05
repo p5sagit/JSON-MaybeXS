@@ -13,13 +13,13 @@ sub _choose_json_module {
 
     my @err;
 
-    return 'Cpanel::JSON::XS' if eval { require Cpanel::JSON::XS; 1; };
+    return 'Cpanel::JSON::XS' if eval { require Cpanel::JSON::XS };
     push @err, "Error loading Cpanel::JSON::XS: $@";
 
-    return 'JSON::XS' if eval { require JSON::XS; 1; };
+    return 'JSON::XS' if eval { require JSON::XS };
     push @err, "Error loading JSON::XS: $@";
 
-    return 'JSON::PP' if eval { require JSON::PP; 1 };
+    return 'JSON::PP' if eval { require JSON::PP };
     push @err, "Error loading JSON::PP: $@";
 
     die join( "\n", "Couldn't load a JSON module:", @err );

@@ -69,16 +69,16 @@ if (! parse_args()->{PUREPERL_ONLY}) {
   # we require Cpanel::JSON::XS, except if JSON::XS is already installed.
   # (we also always recommend Cpanel::JSON::XS, just to make sure.)
   $MM_ARGS{PREREQ_PM}{'Cpanel::JSON::XS'} = '2.3310'
-    if eval { require Cpanel::JSON::XS; 1 }
+    if eval { require Cpanel::JSON::XS }
       or (
-        not eval { require JSON::XS; 1; }
+        not eval { require JSON::XS }
         and can_compile_loadable_object(quiet => 1)
       );
 
   # JSON::XS 3 changed its boolean handling - update it
   # if JSON::XS is installed and < 3.0
   $MM_ARGS{PREREQ_PM}{'JSON::XS'} = '3.00'
-    if eval { require JSON::XS; 1 }
+    if eval { require JSON::XS }
       and not eval { JSON::XS->VERSION('3.0'); 1 };
 }
 
