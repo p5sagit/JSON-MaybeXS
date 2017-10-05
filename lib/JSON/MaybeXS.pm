@@ -288,9 +288,13 @@ Alternatively, you can use duck typing:
 
 At installation time, F<Makefile.PL> will attempt to determine if you have a
 working compiler available, and therefore whether you are able to run XS code.
-If so, L<Cpanel::JSON::XS> will be added to the prerequisite list, unless
-L<JSON::XS> is already installed at a high enough version. L<JSON::XS> may
-also be upgraded to fix any incompatibility issues.
+If so, L<Cpanel::JSON::XS> will be added to the prerequisite list.
+
+If and only if the environment variable C<PERL_JSON_XS_USE> is set
+to a true variable, then unless L<JSON::XS> is already installed at
+a high enough version. L<JSON::XS> may also be upgraded to fix any
+incompatibility issues. If that environment variable is not set to a
+true value, L<JSON::XS> will be ignored.
 
 Because running XS code is not mandatory and L<JSON::PP> (which is in perl
 core) is used as a fallback backend, this module is safe to be used in a suite
