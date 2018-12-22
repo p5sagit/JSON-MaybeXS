@@ -13,6 +13,5 @@ perl:
   - "5.28"
   - "dev"
   - "blead"
-sudo: false
 before_install:
   - eval $(curl https://travis-perl.github.io/init) --auto
