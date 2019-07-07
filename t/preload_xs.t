@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 
+use if !$ENV{PERL_JSON_XS_USE}, 'Test::More', skip_all => 'No JSON::XS override';
 use if !eval { require JSON::XS; 1; }, 'Test::More', skip_all => 'No JSON::XS';
 use Test::More 0.88;
 use JSON::MaybeXS;
