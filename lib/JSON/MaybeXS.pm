@@ -205,6 +205,8 @@ Since this is a bare sub in the various backend classes, it cannot be called as
 a class method like the other interfaces; it must be called as a function, with
 no invocant.  It supports the representation used in all JSON backends.
 
+Available since version 1.002004.
+
 =head1 CONSTRUCTOR
 
 =head2 new
