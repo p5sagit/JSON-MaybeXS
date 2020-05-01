@@ -9,7 +9,7 @@ $VERSION =~ tr/_//d;
 
 sub _choose_json_module {
     return 'Cpanel::JSON::XS' if $INC{'Cpanel/JSON/XS.pm'};
-    return 'JSON::XS'         if $INC{'JSON/XS.pm'};
+    return 'JSON::XS'         if $INC{'JSON/XS.pm'} && eval { JSON::XS->VERSION(3.0); 1 };
 
     my @err;
 
