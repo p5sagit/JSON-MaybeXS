@@ -5,7 +5,7 @@ use warnings FATAL => 'all';
 use base qw(Exporter);
 
 our $VERSION = '1.004000';
-$VERSION = eval $VERSION;
+$VERSION =~ tr/_//d;
 
 sub _choose_json_module {
     return 'Cpanel::JSON::XS' if $INC{'Cpanel/JSON/XS.pm'};
