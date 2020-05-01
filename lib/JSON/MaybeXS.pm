@@ -16,7 +16,7 @@ sub _choose_json_module {
     return 'Cpanel::JSON::XS' if eval { require Cpanel::JSON::XS; 1; };
     push @err, "Error loading Cpanel::JSON::XS: $@";
 
-    return 'JSON::XS' if eval { require JSON::XS; 1; };
+    return 'JSON::XS' if eval { require JSON::XS; JSON::XS->VERSION(3.0); 1; };
     push @err, "Error loading JSON::XS: $@";
 
     return 'JSON::PP' if eval { require JSON::PP; 1 };
