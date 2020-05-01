@@ -65,6 +65,8 @@ my %META = (
 
 my %MM_ARGS = ();
 
+## DYNAMIC PREREQS ###########################################################
+
 if (! parse_args()->{PUREPERL_ONLY}) {
   # we require Cpanel::JSON::XS whenever a compiler is available.
   # (we also always recommend Cpanel::JSON::XS, just to make sure.)
