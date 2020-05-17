@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use if !eval { require JSON::XS; 1; }, 'Test::More', skip_all => 'No JSON::XS';
+use if !eval { require JSON::XS; JSON::XS->VERSION(3.0); 1; }, 'Test::More', skip_all => 'No JSON::XS';
 use Test::More 0.88;
 use JSON::MaybeXS;
 
