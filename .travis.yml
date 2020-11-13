@@ -12,6 +12,7 @@ perl:
   - "5.26"
   - "5.28"
   - "5.30"
+  - "5.32"
   - "dev"
   - "blead"
 before_install:
