@@ -1,5 +1,7 @@
 Revision history for JSON-MaybeXS
 
+ - slight speed optimization for is_bool()
+
 1.004003 - 2020-11-13
  - fix another test that fails when JSON::XS is installed, but below version 3.0
 
