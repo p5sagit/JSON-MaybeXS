@@ -45,9 +45,7 @@ is(
     JSON() . ': false method encodes as correct boolean',
 );
 
-TODO:
 if ($] ge '5.036') {
-  local $TODO = 'support for builtin::is_bool not yet done';
   ok(JSON::MaybeXS::is_bool(!!0), 'is_bool recognizes new stablebool false');
   ok(JSON::MaybeXS::is_bool(!!1), 'is_bool recognizes new stablebool true');
 }

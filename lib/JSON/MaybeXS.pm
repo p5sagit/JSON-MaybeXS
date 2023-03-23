@@ -52,10 +52,14 @@ sub new {
 }
 
 use Scalar::Util ();
+use constant HAVE_BUILTIN => "$]" >= 5.036;
+use if HAVE_BUILTIN, experimental => 'builtin';
 
 sub is_bool {
   die 'is_bool is not a method' if @_ > 1;
 
+  HAVE_BUILTIN and builtin::is_bool($_[0])
+  or
   Scalar::Util::blessed($_[0])
     and ($_[0]->isa('JSON::PP::Boolean')
       or $_[0]->isa('Cpanel::JSON::XS::Boolean')
