@@ -54,7 +54,7 @@ sub new {
 use Scalar::Util ();
 
 sub is_bool {
-  die 'is_bool is not a method' if $_[1];
+  die 'is_bool is not a method' if @_ > 1;
 
   Scalar::Util::blessed($_[0])
     and ($_[0]->isa('JSON::PP::Boolean')
