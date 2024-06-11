@@ -60,7 +60,7 @@ sub is_bool {
 
   HAVE_BUILTIN and builtin::is_bool($_[0])
   or
-  Scalar::Util::blessed($_[0])
+  !!Scalar::Util::blessed($_[0])
     and ($_[0]->isa('JSON::PP::Boolean')
       or $_[0]->isa('Cpanel::JSON::XS::Boolean')
       or $_[0]->isa('JSON::XS::Boolean'));
