@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.004006 - 2024-08-02
  - is_bool() now recognizes core booleans (perl 5.36+). Note that JSON::PP
    4.11 and Cpanel::JSON::XS 4.38 are required to properly encode them.
 
