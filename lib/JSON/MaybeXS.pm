@@ -4,7 +4,7 @@ use strict;
 use warnings FATAL => 'all';
 use base qw(Exporter);
 
-our $VERSION = '1.004005';
+our $VERSION = '1.004006';
 $VERSION =~ tr/_//d;
 
 sub _choose_json_module {
