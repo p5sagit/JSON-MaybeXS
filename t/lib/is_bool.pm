@@ -30,7 +30,15 @@ SKIP: {
   test_is_bool(!!1, 'native boolean true is a bool');
 }
 
+my $zero = 0;
+test_is_bool(bless(\$zero, $_), "$_ object is a boolean") foreach qw(
+    JSON::PP::Boolean
+    Cpanel::JSON::XS::Boolean
+    JSON::XS::Boolean
+  );
+
 test_isnt_bool(bless({}, 'Local::Foo'), 'other blessed objects are not booleans');
+
 TODO: {
   local $TODO = 'Scalar::Util::blessed does not yet return a native bool';
     # ... if !eval { Scalar::Util->VERSION(<fixed version>) };
