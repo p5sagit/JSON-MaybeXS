@@ -1,5 +1,6 @@
 Revision history for JSON-MaybeXS
 
+1.004007 - 2024-08-03
  - remove unneeded tests that fail on perls < 5.36
 
 1.004006 - 2024-08-02
