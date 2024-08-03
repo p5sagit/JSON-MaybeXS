@@ -69,12 +69,10 @@ is(
     JSON() . ': false method encodes as correct boolean',
 );
 
-if ("$]" >= 5.036) {
+SKIP: {
+  skip ('these tests are only valid for perl 5.36+', 2) if "$]" < 5.036;
   test_is_bool(!!0, 'is_bool recognizes new stablebool false');
   test_is_bool(!!1, 'is_bool recognizes new stablebool true');
-}
-else {
-  diag 'tests for 5.36+ are skipped';
 }
 
 test_isnt_bool(0, 'numeric 0 is not a bool');
