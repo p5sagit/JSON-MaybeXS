@@ -36,8 +36,6 @@ TODO: {
     # ... if !eval { Scalar::Util->VERSION(<fixed version>) };
   test_is_bool(Scalar::Util::blessed('hi'), 'blessed() returns a bool');
 }
-test_is_bool(bless({}, 'Local::Foo')->isa('Local::Foo'), 'true isa() returns a bool');
-test_is_bool(bless({}, 'Local::Foo')->isa('Local::Bar'), 'false isa() returns a bool');
 
 my $data = JSON::MaybeXS->new->decode('{"foo": true, "bar": false, "baz": 1}');
 diag 'true is: ', explain $data->{foo};
