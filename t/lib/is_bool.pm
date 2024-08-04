@@ -39,12 +39,6 @@ test_is_bool(bless(\$zero, $_), "$_ object is a boolean") foreach qw(
 
 test_isnt_bool(bless({}, 'Local::Foo'), 'other blessed objects are not booleans');
 
-TODO: {
-  local $TODO = 'Scalar::Util::blessed does not yet return a native bool';
-    # ... if !eval { Scalar::Util->VERSION(<fixed version>) };
-  test_is_bool(Scalar::Util::blessed('hi'), 'blessed() returns a bool');
-}
-
 my $data = JSON::MaybeXS->new->decode('{"foo": true, "bar": false, "baz": 1}');
 diag 'true is: ', explain $data->{foo};
 diag 'false is: ', explain $data->{bar};
