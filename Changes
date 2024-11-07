@@ -1,5 +1,7 @@
 Revision history for JSON-MaybeXS
 
+ - use newer style of exporting symbols, without inheriting from Exporter
+
 1.004008 - 2024-08-10
  - improved boolean testing
 

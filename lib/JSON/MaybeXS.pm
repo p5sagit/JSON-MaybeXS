@@ -2,7 +2,7 @@ package JSON::MaybeXS;
 
 use strict;
 use warnings FATAL => 'all';
-use base qw(Exporter);
+use Exporter 'import';
 
 our $VERSION = '1.004008';
 $VERSION =~ tr/_//d;
